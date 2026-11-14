@@ -30,23 +30,36 @@ int walk(const char *path, int indent) {
   }
 
   struct dirent *dp;
+  // this structure contains the information about the directory entry 
 
   while ((dp = readdir(dir)) != NULL) {
+    // readdir has return type of struct dirent *
 
     const char *name = dp->d_name; // d_name is the null terminated file name of type char
+    // d_type contains the name of file or directory 
     printf("%s\n", name);
+    // prints the name of all files and directories in current directories  
 
     if (strcmp(name, ".") == 0 || strcmp(name, "..") == 0)
     {
       continue;
     }
     // this if statement skipps . and .. 
+    // up to here is reading directory entry readdir() reads one directory entry at a time
 
-    if (dp->d_type == DT_DIR) {
+
+    // check man page of readdir to understand about DT_DIR 
+      if (dp->d_type == DT_DIR ){ 
+      // if d_type is directory
+      // Note : d->d_type can be files as well 
+
       print_file(name, 1, indent);
 
+
       size_t len = strlen(path) + strlen(name) + 2;
+      // strlen returns number of characters in strings excluding the null terminator \0
       char sub_path[len];
+      
 
       snprintf(sub_path, len, "%s/%s", path, name);
       walk(sub_path, indent + 1);
