@@ -25,7 +25,7 @@ int walk(const char *path, int indent) {
   DIR *dir = opendir(path);
 
   if (!dir) {
-    perror("opendir");
+    perror("opendir ");
     return 1;
   }
 
@@ -37,6 +37,7 @@ int walk(const char *path, int indent) {
 
     const char *name = dp->d_name; // d_name is the null terminated file name of type char
     // d_type contains the name of file or directory 
+    
     printf("%s\n", name);
     // prints the name of all files and directories in current directories  
 
@@ -49,19 +50,26 @@ int walk(const char *path, int indent) {
 
 
     // check man page of readdir to understand about DT_DIR 
-      if (dp->d_type == DT_DIR ){ 
-      // if d_type is directory
-      // Note : d->d_type can be files as well 
+      // if d_type is directory ... 
+    if (dp->d_type == DT_DIR ){ 
+ 
 
       print_file(name, 1, indent);
 
 
       size_t len = strlen(path) + strlen(name) + 2;
       // strlen returns number of characters in strings excluding the null terminator \0
+      //  sk +2 means "\0" and "/" used in path eg: path + /documents\0 
       char sub_path[len];
+      // sub_path holds the full path of the subdirectory
+      
+      // sub_path = buffer that holds the combined path.
+      // len = total memory required to store that combined path, including / and \0. 
       
 
       snprintf(sub_path, len, "%s/%s", path, name);
+  //  snprintf(buf, countof(buf), "%s some further text", buf);
+      // check man page of snprintf
       walk(sub_path, indent + 1);
     }
     else {
