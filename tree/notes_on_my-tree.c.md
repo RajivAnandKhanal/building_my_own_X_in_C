@@ -104,3 +104,11 @@ printf("%*c", 4, 'A');
 // pirint the character A after four space ie:
 //    A  
 ```
+---------------------------------
+
+Note:
+1. After successfully opening the directory, we use readdir(dir) inside a while loop to read directory entries one by one, storing each entry in the dp pointer, until there are no more entries.  
+2. Then we get the entry's name using dp->d_name, print it, skip . and .., and check dp->d_type to determine whether it's a directory or a regular file.  
+3. If it's a directory (DT_DIR), we print its name in blue, construct its full path, and recursively call walk(sub_path, indent + 1) to explore that directory; otherwise, we print it as a file.  
+4. After processing all entries, we close the directory using closedir(dir) and return 0 to indicate successful execution.  
+5. main() returns the error code from walk() as the program's exit status. 
