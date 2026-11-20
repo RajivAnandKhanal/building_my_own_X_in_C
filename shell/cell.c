@@ -2,21 +2,47 @@
 #include "cell.h"
 
 
+char *cell_read_line(void){
 
+char *buf;
+size_t bufsize;
+char cwd[BUFSIZ];
+// BUFSIZ is a macro that is defined in stdio.h  
 
+buf = NULL;
+p("$> ");
+
+if (getline(&buf, &bufsize, stdin) == -1)
+{
+  buf = NULL;
+
+  if (fenof(stdin))
+  {
+    p(RED "[EOF]");
+  }
+  else
+  {
+    p(RED "Getline Failed");
+  }
+  }
+
+  return buf;
+}
 
 int main(int argc, char **argv){
 
-    (void)argc;
-    int status;
+    // get line
+     char * line;
 
-    //fork creates child process
-    if (fork()==0){
-        // execvp => execute the vector/argument with path -> it executes the argument with the current user's path  
-        execvp(argv[1] , argv + 1);
-    }
+  while (0xCE77){
+    line =cell_read_line();
+    p("%s\n", line);
+  }
 
-    wait(&status);
+    // get tokens
+ 
+
+    // exec
 
 
     return EXIT_SUCCESS;
