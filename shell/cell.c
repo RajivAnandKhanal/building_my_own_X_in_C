@@ -16,7 +16,7 @@ if (getline(&buf, &bufsize, stdin) == -1)
 {
   buf = NULL;
 
-  if (fenof(stdin))
+  if (feof(stdin))
   {
     p(RED "[EOF]");
   }

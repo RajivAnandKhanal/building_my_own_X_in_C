@@ -20,7 +20,7 @@ RST - Reset to default color
 #define RED     "\033[1;3im"
 #define RST     "\033[0m"
 
-#define p(...) printf(__VA_ARGS_)
+#define p(...) printf(__VA_ARGS__)
 
 
 #endif
