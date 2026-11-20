@@ -10,7 +10,14 @@ char cwd[BUFSIZ];
 // BUFSIZ is a macro that is defined in stdio.h  
 
 buf = NULL;
-p("$> ");
+
+GetCwd(cwd, sizeof(cwd));
+
+// if(isatty(fileno(stdin))){}
+// todo -> this checks wheather the shell is in interactive mode or running scripts
+
+p(C"🐚 %s 🦠 $> ", cwd); 
+// %s is the actual path which is cwd
 
 if (getline(&buf, &bufsize, stdin) == -1)
 {

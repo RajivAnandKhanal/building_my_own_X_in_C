@@ -96,3 +96,25 @@ while(1)
 ### `Resources : https://gcc.gnu.org/onlinedocs/cpp/Variadic-Macros.html`
 
 `__VA_ARGS__` is a special preprocessor identifuer that represnts all arguments passed to `...`
+
+---
+
+### Adding custom function of different source file via header file
+
+```sh
+touch utils.c
+```
+
+```c
+printf("this is utils.c");
+
+void AnyFun(char *, size_t){
+// any user defined/needed function in utils.c
+}
+```
+
+```h
+void AnyFun(char *, size_t);
+```
+
+---

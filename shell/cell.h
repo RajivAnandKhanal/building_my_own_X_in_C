@@ -22,5 +22,6 @@ RST - Reset to default color
 
 #define p(...) printf(__VA_ARGS__)
 
+void GetCwd(char *, size_t);
 
 #endif
